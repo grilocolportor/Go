@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
         UserRepository userRepository = new UserRepository(this);
         List<User> userList = userRepository.getUser();
         if(userList.isEmpty()){
-            intent = new Intent(this, Login.class);
+            intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }else{
-            intent = new Intent(this, Go.class);
+            intent = new Intent(this, GoActivity.class);
             startActivity(intent);
         }
     }
