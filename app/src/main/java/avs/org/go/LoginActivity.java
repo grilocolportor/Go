@@ -1,14 +1,17 @@
 package avs.org.go;
 
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import avs.org.go.Controller.CountryController;
+import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
-import avs.org.go.util.Internet;
+
 
 public class LoginActivity extends AppCompatActivity {
+
+    public static final String TAG = "LOGIN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,13 @@ public class LoginActivity extends AppCompatActivity {
         if(netWorkStatus) {
 
             Device device = avs.org.go.util.System.getDevice(this);
+
+            CountryController cc = new CountryController();
+            Country country  = cc.getCountry(device);
+
+            Log.i(TAG, "Country: " + country.getShort_name());
+
+
         }else{
 
         }
