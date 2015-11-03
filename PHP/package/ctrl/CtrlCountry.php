@@ -15,12 +15,10 @@
 
     if( strcasecmp( $_SG['method'], 'one-country' ) == 0 ){
 
-        $engine = new Engine( 325, 2005, '4.9' );
-        $brand = new Brand('Cadillac', null);
-        $car = new Car('ZT06', null, $brand, $engine);
+        $country = new Country('236', 'US', 'United States', 'United States of America', 'USA',
+                                                               '840', 'yes', '1', '.us');
 
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode( array('car'=>$car) );
+        echo json_encode( array('country'=>$country) );
 
     }
-?>

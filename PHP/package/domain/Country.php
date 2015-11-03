@@ -18,10 +18,10 @@ class Country extends Obj {
      public cctld;
 
 
-    public function __construct( $name, $pathImg, Brand $brand, Engine $engine ){
+    public function __construct( $country_id, $iso2, $short_name, $long_name, $iso3,
+                                $numcode, $un_memmber, $calling_code, $cctld ){
         $this->country_id = $country_id;
         $this->iso2 = $iso2;
-        $this->country_id = $country_id;
         $this->short_name = $short_name;
         $this->long_name = $long_name;
         $this->iso3 = $iso3;

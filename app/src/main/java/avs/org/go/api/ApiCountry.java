@@ -7,11 +7,12 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
 /**
- * Created by venancio.junior on 29/10/2015.
+ * Created by venancio.junior on 30/10/2015.
  */
 public interface ApiCountry {
+
     @FormUrlEncoded
     @POST("package/ctrl/CtrlCountry.php")
-    Call<Country> getCountry(@Field("method") String method, @Field("iso2") String country);
+    Call<Country> getCountry( @Field("method") String method);
 
 }

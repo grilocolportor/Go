@@ -3,6 +3,7 @@ package avs.org.go;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import avs.org.go.Controller.CountryController;
 import avs.org.go.dominio.Country;
@@ -33,9 +34,13 @@ public class LoginActivity extends AppCompatActivity {
             Device device = avs.org.go.util.System.getDevice(this);
 
             CountryController cc = new CountryController();
-            Country country  = cc.getCountry(device);
+            cc.findCountry(device, this);
+            //Country country = cc.getCountry();
 
-            Log.i(TAG, "Country: " + country.getShort_name());
+            Log.i(TAG, "Country: " + cc.getCountryShortName());
+
+           // TextView lblCountry = (TextView) findViewById(R.id.lblCountry);
+           // lblCountry.setText(country.getShort_name());
 
 
         }else{
