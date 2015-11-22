@@ -15,6 +15,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "USER";
     public static final String USER_COLUMN_PHONE = "PHONE";
     public static final String USER_COLUMN_COUNTRY_CODE = "COUNTRY_CODE";
+    public static final String USER_COLUMN_COUNTRY_NAME = "COUNTRY_NAME";
     public static final String USER_COLUMN_IMEI = "IMEI";
     public static final String USER_COLUMN_SERIAL_SIM = "SERIAL_SIM";
     public static final String USER_COLUMN_NOME = "NOME";
@@ -23,6 +24,7 @@ public class DataBase extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_NAME + " (" +
             USER_COLUMN_PHONE + " VARCHAR(20), " +
             USER_COLUMN_COUNTRY_CODE + " VARCHAR(4), " +
+            USER_COLUMN_COUNTRY_NAME + " VARCHAR(50), " +
             USER_COLUMN_IMEI + " VARCHAR(50), " +
             USER_COLUMN_SERIAL_SIM + " VARCHAR(50), " +
             USER_COLUMN_NOME  + " VARCHAR(50), " +

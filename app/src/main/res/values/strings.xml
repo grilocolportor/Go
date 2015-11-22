@@ -8,6 +8,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!-- menus -->
+    <string name="menu_avancar">Avançar</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_name">Nome</string>
@@ -22,4 +25,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
 </resources>

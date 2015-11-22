@@ -24,7 +24,7 @@ public class UserRepository extends DataBase {
 
         List<User> userList = new ArrayList<>();
 
-        String[] columns = {USER_COLUMN_COUNTRY_CODE, USER_COLUMN_EMAIL,
+        String[] columns = {USER_COLUMN_COUNTRY_CODE, USER_COLUMN_COUNTRY_NAME, USER_COLUMN_EMAIL,
                 USER_COLUMN_IMAGE_PATH, USER_COLUMN_IMEI, USER_COLUMN_NOME, USER_COLUMN_PHONE, USER_COLUMN_SERIAL_SIM};
 
         Cursor cursor = this.getReadableDatabase().query(TABLE_NAME, columns, null, null, null, null, null);
@@ -36,6 +36,12 @@ public class UserRepository extends DataBase {
 
         return userList;
 
+    }
+
+    public void addUser(User user){
+        String sql = "INSERT INTO USER(" + USER_COLUMN_COUNTRY_CODE + ", " + USER_COLUMN_COUNTRY_NAME + ")" +
+                " values (  '" + user.getCountryCode() + "', '" + user.getCountryName() + "')";
+        this.getWritableDatabase().execSQL(sql);
     }
 
 }

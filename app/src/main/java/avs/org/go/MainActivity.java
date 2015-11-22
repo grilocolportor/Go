@@ -20,12 +20,26 @@ public class MainActivity extends AppCompatActivity {
 
         UserRepository userRepository = new UserRepository(this);
         List<User> userList = userRepository.getUser();
+
         if(userList.isEmpty()){
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            this.finish();
         }else{
-            intent = new Intent(this, GoActivity.class);
-            startActivity(intent);
+            User user = userList.get(0);
+            if(user.getCountryCode() == null || user.getCountryCode().isEmpty() ||
+                    user.getPhone() == null || user.getPhone().isEmpty() ||
+                    user.getNome() == null || user.getNome().isEmpty()) {
+
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                this.finish();
+
+            }else{
+                intent = new Intent(this, GoActivity.class);
+                startActivity(intent);
+                this.finish();
+            }
         }
     }
 }
