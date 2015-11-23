@@ -8,11 +8,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import java.util.List;
 
 import avs.org.go.Controller.CountryController;
-import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
+import avs.org.go.dominio.User;
+import avs.org.go.repository.UserRepository;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LOGIN";
 
     private EditText txtPhone;
+    private EditText txtNome;
+    private EditText txtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,10 @@ public class LoginActivity extends AppCompatActivity {
         if(netWorkStatus) {
 
             Device device = avs.org.go.util.System.getDevice(this);
+
             txtPhone = (EditText) findViewById(R.id.txtPhone);
+            txtNome = (EditText) findViewById(R.id.txtName);
+            txtEmail = (EditText) findViewById(R.id.txtEmail);
 
             this.txtPhone.setText(device.getPhone());
 
@@ -47,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             cc.findCountry(device, this);
             //Country country = cc.getCountry();
 
-            Log.i(TAG, "Country: " + cc.getCountryShortName());
+          //  Log.i(TAG, "Country: " + cc.);
 
            // TextView lblCountry = (TextView) findViewById(R.id.lblCountry);
            // lblCountry.setText(country.getShort_name());
@@ -70,12 +77,33 @@ public class LoginActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_avancar:
-                Intent i  = new Intent(this, LoginPhotoActivity.class);
-                startActivity(i);
-                this.finish();
-                return true;
+                UserRepository userRepository = new UserRepository(this);
+                List<User> userList = userRepository.getUser();
+                String mensagem = validateField(userList);
+                if(mensagem==null){
+                    Intent i = new Intent(this, LoginPhotoActivity.class);
+                    startActivity(i);
+                    this.finish();
+                    return true;
+                }else{
+                    avs.org.go.util.System s = new avs.org.go.util.System();
+                    s.showToast(this, mensagem);
+                }
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private String validateField(List<User> userList){
+        if(this.txtPhone.getText()==null || this.txtPhone.getText().toString().isEmpty()){
+            return "Informe o numero do telefone!!";
+        }else if(this.txtPhone.getText().length() < Integer.parseInt(userList.get(0).getPhone_min()) ||
+                this.txtPhone.getText().length() > Integer.parseInt(userList.get(0).getPhone_max())){
+            return "O tamanho do número não parece esta correto para sua região";
+        }else if(this.txtNome.getText()==null || this.txtNome.getText().toString().isEmpty()){
+            return "Informe um nome!";
+        }else{
+            return null;
         }
     }
 }
