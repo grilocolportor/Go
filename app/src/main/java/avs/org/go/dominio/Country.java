@@ -77,6 +77,22 @@ public class Country {
         this.cctld = cctld;
     }
 
+    public String getPhone_min() {
+        return phone_size_min;
+    }
+
+    public void setPhone_min(String phone_size_min) {
+        this.phone_size_min = phone_size_min;
+    }
+
+    public String getPhone_max() {
+        return phone_size_max;
+    }
+
+    public void setPhone_max(String phone_size_max) {
+        this.phone_size_max = phone_size_max;
+    }
+
     private int country_id;
     private String iso2;
     private String short_name;
@@ -86,5 +102,8 @@ public class Country {
     private String un_memmber;
     private String calling_code;
     private String cctld;
+    private String phone_size_min;
+    private String phone_size_max;
+
 
 }

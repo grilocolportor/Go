@@ -13,6 +13,25 @@ public class User {
     private String email;
     private String imagePath;
     private String countryName;
+    private String phone_min;
+    private String phone_max;
+
+    public String getPhone_max() {
+        return phone_max;
+    }
+
+    public void setPhone_max(String phone_max) {
+        this.phone_max = phone_max;
+    }
+
+    public String getPhone_min() {
+        return phone_min;
+    }
+
+    public void setPhone_min(String phone_min) {
+        this.phone_min = phone_min;
+    }
+
 
     public String getCountryName() {
         return countryName;

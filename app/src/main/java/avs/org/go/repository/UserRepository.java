@@ -20,16 +20,15 @@ public class UserRepository extends DataBase {
         super(context);
     }
 
-    public List<User> getUser(){
+    public List<User> getUser() {
 
         List<User> userList = new ArrayList<>();
 
-        String[] columns = {USER_COLUMN_COUNTRY_CODE, USER_COLUMN_COUNTRY_NAME, USER_COLUMN_EMAIL,
-                USER_COLUMN_IMAGE_PATH, USER_COLUMN_IMEI, USER_COLUMN_NOME, USER_COLUMN_PHONE, USER_COLUMN_SERIAL_SIM};
+        String[] columns = {USER_COLUMN_EMAIL, USER_COLUMN_NOME};
 
-        Cursor cursor = this.getReadableDatabase().query(TABLE_NAME, columns, null, null, null, null, null);
+        Cursor cursor = this.getReadableDatabase().query(USER_TABLE, columns, null, null, null, null, null);
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             User u = new User();
             userList.add(u);
         }
@@ -38,10 +37,11 @@ public class UserRepository extends DataBase {
 
     }
 
-    public void addUser(User user){
-        String sql = "INSERT INTO USER(" + USER_COLUMN_COUNTRY_CODE + ", " + USER_COLUMN_COUNTRY_NAME + ")" +
-                " values (  '" + user.getCountryCode() + "', '" + user.getCountryName() + "')";
+    public void addUser(User user) {
+        String sql = "INSERT INTO USER(" + USER_COLUMN_NOME + ", " + USER_COLUMN_EMAIL + ")" +
+                " values (  '" + user.getNome() + "', '" + user.getEmail() + "')";
         this.getWritableDatabase().execSQL(sql);
     }
+
 
 }

@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import java.util.List;
 
+import avs.org.go.dominio.Country;
 import avs.org.go.dominio.User;
+import avs.org.go.repository.CountryRespository;
 import avs.org.go.repository.UserRepository;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,19 +20,18 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent;
 
-        UserRepository userRepository = new UserRepository(this);
-        List<User> userList = userRepository.getUser();
+        CountryRespository countryRepository = new CountryRespository(this);
+        List<Country> countryrList = countryRepository.getCountry();
 
-        if(userList.isEmpty()){
+        if(countryrList.isEmpty()){
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             this.finish();
         }else{
-            User user = userList.get(0);
-            if(user.getCountryCode() == null || user.getCountryCode().isEmpty() ||
-                    user.getPhone() == null || user.getPhone().isEmpty() ||
-                    user.getNome() == null || user.getNome().isEmpty()) {
 
+            UserRepository userRepository = new UserRepository(this);
+            List<User> userList = userRepository.getUser();
+            if(userList.isEmpty()){
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 this.finish();

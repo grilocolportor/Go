@@ -12,8 +12,10 @@ import android.widget.EditText;
 import java.util.List;
 
 import avs.org.go.Controller.CountryController;
+import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
+import avs.org.go.repository.CountryRespository;
 import avs.org.go.repository.UserRepository;
 
 
@@ -77,10 +79,12 @@ public class LoginActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_avancar:
-                UserRepository userRepository = new UserRepository(this);
-                List<User> userList = userRepository.getUser();
-                String mensagem = validateField(userList);
+
+                String mensagem = validateField();
                 if(mensagem==null){
+
+
+
                     Intent i = new Intent(this, LoginPhotoActivity.class);
                     startActivity(i);
                     this.finish();
@@ -94,16 +98,25 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private String validateField(List<User> userList){
-        if(this.txtPhone.getText()==null || this.txtPhone.getText().toString().isEmpty()){
+    private String validateField(){
+        CountryRespository countryRepository = new CountryRespository(this);
+        List<Country> countryList = countryRepository.getCountry();
+        int min = 0;
+        int max = 0;
+        if(!countryList.isEmpty()) {
+           min =  Integer.parseInt(countryList.get(0).getPhone_min());
+           max = Integer.parseInt(countryList.get(0).getPhone_max());
+        }
+        if (this.txtPhone.getText() == null || this.txtPhone.getText().toString().isEmpty()) {
             return "Informe o numero do telefone!!";
-        }else if(this.txtPhone.getText().length() < Integer.parseInt(userList.get(0).getPhone_min()) ||
-                this.txtPhone.getText().length() > Integer.parseInt(userList.get(0).getPhone_max())){
+        } else if (this.txtPhone.getText().length() <  min ||
+                    this.txtPhone.getText().length() > max) {
             return "O tamanho do número não parece esta correto para sua região";
-        }else if(this.txtNome.getText()==null || this.txtNome.getText().toString().isEmpty()){
+        } else if (this.txtNome.getText() == null || this.txtNome.getText().toString().isEmpty()) {
             return "Informe um nome!";
-        }else{
+        } else {
             return null;
         }
+
     }
 }

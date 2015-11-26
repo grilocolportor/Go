@@ -15,8 +15,10 @@
 
     if( strcasecmp( $_SG['method'], 'one-country' ) == 0 ){
 
-        $country = new Country('236', 'US', 'United States', 'United States of America', 'USA',
-                                                               '840', 'yes', '1', '.us');
+		// echo 'entrou aqui';
+	
+        $country = new Country(236, 'US', 'United States', 'United States of America', 'USA',
+                                                               '840', 'yes', '1', '.us', '10', '11');
 
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode( array('country'=>$country) );

@@ -38,10 +38,10 @@ public class CountryRespository extends DataBase {
         if(cursor.getCount()!=0) {
             while (cursor.moveToNext()) {
                 Country c = new Country();
-               // c.setCountry_id(Integer.parseInt(cursor.getColumnName(cursor.getColumnIndex(COUNTRY_COLUMN_CODE))));
-                c.setShort_name(cursor.getColumnName(cursor.getColumnIndex(COUNTRY_COLUMN_NAME)));
-                c.setPhone_min(cursor.getColumnName(cursor.getColumnIndex(COUNTRY_COLUMN_PHONE_MIN)));
-                c.setPhone_max(cursor.getColumnName(cursor.getColumnIndex(COUNTRY_COLUMN_PHONE_MAX)));
+                //c.setCountry_id(cursor.getInt(Integer.parseInt(cursor.getColumnName(cursor.getColumnIndex(COUNTRY_COLUMN_CODE)))));
+                c.setShort_name(cursor.getString(cursor.getColumnIndex(COUNTRY_COLUMN_NAME)));
+                c.setPhone_min(cursor.getString(cursor.getColumnIndex(COUNTRY_COLUMN_PHONE_MIN)));
+                c.setPhone_max(cursor.getString(cursor.getColumnIndex(COUNTRY_COLUMN_PHONE_MAX)));
                 countryList.add(c);
             }
         }
