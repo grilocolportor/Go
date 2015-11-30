@@ -61,9 +61,10 @@ public class CountryController {
                 Country c = response.body();
 
                 TextView lblCountry = (TextView) activity.findViewById(R.id.lblCountry);
-                lblCountry.setText(c.getShort_name() + " +" + c.getCalling_code());
-
-                Log.i(TAG, "Country1: " + c.getShort_name() + " +" + c.getCalling_code());
+                TextView lblCode = (TextView) activity.findViewById(R.id.lblCountryCode);
+                lblCountry.setText(c.getShort_name() );
+                lblCode.setText(c.getCalling_code());
+                Log.i(TAG, "Country: " + c.getShort_name() + " +" + c.getCalling_code());
 
 
                 CountryRespository countryRepository = new CountryRespository(context);

@@ -18,16 +18,12 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String USER_COLUMN_SERIAL_SIM = "SERIAL_SIM";
     public static final String USER_COLUMN_NOME = "NOME";
     public static final String USER_COLUMN_EMAIL = "EMAIL";
-    public static final String USER_COLUMN_IMAGE_PATH = "IMAGE_PATH";
-    public static final String USER_COLUMN_PHONE_MIN = "PHONE_MIN";
-    public static final String USER_COLUMN_PHONE_MAX = "PHONE_MAX";
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + USER_TABLE + " (" +
             USER_COLUMN_PHONE + " VARCHAR(20), " +
             USER_COLUMN_IMEI + " VARCHAR(50), " +
             USER_COLUMN_SERIAL_SIM + " VARCHAR(50), " +
             USER_COLUMN_NOME  + " VARCHAR(50), " +
-            USER_COLUMN_EMAIL + " VARCHAR(50), " +
-            USER_COLUMN_IMAGE_PATH + " VARCHAR(50))";
+            USER_COLUMN_EMAIL + " VARCHAR(50))";
 
     public static final String COUNTRY_TABLE = "COUNTRY";
     public static final String COUNTRY_COLUMN_CODE = "COUNTRY_CODE";

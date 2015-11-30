@@ -3,19 +3,16 @@ package avs.org.go.Controller;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import avs.org.go.api.ApiUser;
-import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
 import avs.org.go.dominio.UserWrapRequest;
 import avs.org.go.repository.UserRepository;
 import avs.org.go.util.Constantes;
-import avs.org.go.util.CountryDeserializer;
 import avs.org.go.util.UserDeserializer;
 import retrofit.Call;
 import retrofit.Callback;
@@ -29,10 +26,10 @@ import retrofit.Retrofit;
 public class UserController {
 
     public static final String TAG = "LOG";
-    public static final String API = Constantes.URL_JOB;
+    public static final String API = Constantes.URL_HOME;
 
     private ApiUser userAPI;
-
+    private User user;
 
     private Context context;
 
@@ -79,14 +76,29 @@ public class UserController {
 
     }
 
-    public void saveUser(User user){
+    public void saveUser(final User user){
 
-        UserWrapRequest userWrapRequest = new UserWrapRequest( "save-car", user );
+        Gson gson = new GsonBuilder().registerTypeAdapter(User.class, new UserDeserializer()).create();
 
-        Call<User> call = userAPI.saveUser(userWrapRequest);
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(API)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        userAPI = retrofit.create(ApiUser.class);
+
+        UserWrapRequest userWrapRequest = new UserWrapRequest( "save-user",  user );
+
+        //Call<User> call = userAPI.saveUser(userWrapRequest);
+        String gsons = new Gson().toJson(user);
+        Call<User> call = userAPI.saveUser("save-user", gsons);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Response<User> response, Retrofit retrofit) {
+                UserRepository userRepository = new UserRepository(context);
+
+                userRepository.addUser(user);
+
             }
 
             @Override

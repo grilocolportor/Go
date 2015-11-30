@@ -13,10 +13,14 @@ import retrofit.http.POST;
  * Created by venancio.junior on 26/11/2015.
  */
 public interface ApiUser {
-    @FormUrlEncoded
-    @POST("package/ctrl/CtrlUser.php")
-    Call<User> saveUser(@Body UserWrapRequest wrapRequest);
 
+    /*@POST("package/ctrl/CtrlUser.php")
+    Call<User> saveUser(@Body UserWrapRequest wrapRequest);*/
+
+
+    @FormUrlEncoded
+    @POST("package/ctrl/CtrlCar.php")
+    Call<User> saveUser( @Field("method") String method, @Field("user") String userJson);
 
     @FormUrlEncoded
     @POST("package/ctrl/CtrlUser.php")

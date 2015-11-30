@@ -8,10 +8,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.List;
 
 import avs.org.go.Controller.CountryController;
+import avs.org.go.Controller.UserController;
 import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
@@ -26,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtPhone;
     private EditText txtNome;
     private EditText txtEmail;
+    private TextView lblCountryName;
+    private TextView lblCountryCod;
+    private Device device;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +49,14 @@ public class LoginActivity extends AppCompatActivity {
 
         if(netWorkStatus) {
 
-            Device device = avs.org.go.util.System.getDevice(this);
+            device = avs.org.go.util.System.getDevice(this);
 
             txtPhone = (EditText) findViewById(R.id.txtPhone);
             txtNome = (EditText) findViewById(R.id.txtName);
             txtEmail = (EditText) findViewById(R.id.txtEmail);
+
+            lblCountryCod = (TextView) findViewById(R.id.lblCountryCode);
+            lblCountryName = (TextView) findViewById(R.id.lblCountry);
 
             this.txtPhone.setText(device.getPhone());
 
@@ -82,8 +90,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 String mensagem = validateField();
                 if(mensagem==null){
+                    User user = new User();
+                    user.setSerialSim(device.getSerialSim());
+                    user.setEmail(txtEmail.getText().toString());
+                    user.setImei(device.getImei());
+                    user.setNome(txtNome.getText().toString());
+                    user.setPhone(lblCountryCod.getText().toString() + txtPhone.getText().toString());
 
-
+                    UserController userController = new UserController(this);
+                    userController.saveUser(user);
 
                     Intent i = new Intent(this, LoginPhotoActivity.class);
                     startActivity(i);

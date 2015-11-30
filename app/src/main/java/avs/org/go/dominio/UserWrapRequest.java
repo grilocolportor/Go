@@ -7,9 +7,6 @@ public class UserWrapRequest {
     private String method;
     private User user;
 
-
-    public UserWrapRequest() {}
-
     public UserWrapRequest(String method, User user) {
         this.method = method;
         this.user = user;
@@ -24,11 +21,11 @@ public class UserWrapRequest {
         this.method = method;
     }
 
-    public User getCar() {
+    public User getUser() {
         return user;
     }
 
-    public void setCar(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }
