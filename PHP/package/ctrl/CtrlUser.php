@@ -57,10 +57,10 @@
 		
 		$str = preg_split("/[\,]+/", $string); 
 		
-			$email = $str[1];
-			$imei =  $str[5];
+			$email = $str[0];
+			$imei =  $str[1];
 			$name =  $str[2];
-			$phone =  $str[4];
+			$phone =  $str[3];
 			$serial_sim = $str[4];		
 			
 			 
