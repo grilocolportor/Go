@@ -39,30 +39,40 @@
 
     }else if( strcasecmp( $_SG['method'], 'save-user' ) == 0 ){
         $data = json_decode($_SG['user'], true);
-		$string = '1';
-		foreach ($data as $k => $value) {
-			$string = $string." ,".$value;
-			
-		}
-		$string = $string.",1";
-		$str = preg_split("/[\s,]+/", $string); 
-		$email = $str[1];
-		$imei =  $str[2];
-		$name =  $str[3];
-		$phone =  $str[4];
-		$serial_sim  $str[5];	
+		//$string="";
+		foreach ($data as  $value) {
+			$string = $string."".$value.",";
+				//$email = $value//$str[1];
+				//$imei =  $value//$str[2];
+				//$name =  $value//$str[3];
+				//$phone =  $value//$str[4];
+				//$serial_sim = //$value$str[5];	
 			
 			 
-		$crud = new crud('user');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
-		$crud->inserir("name,phone, email, imei, serial_sim", "'$name','$phone', '$email', '$imei', '$serial_sim' "); // utiliza a funçao INSERIR da classe crud
+		//	$crud = new crud('user');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
+		//	$crud->inserir("name,phone, email, imei, serial_sim", "'$name','$phone', '$email', '$imei', '$serial_sim' "); // utiliza a funçao INSERIR da classe crud
 			
+		}
+		//$string = $string.",1";
+		
+		$str = preg_split("/[\,]+/", $string); 
+		
+			$email = $str[1];
+			$imei =  $str[5];
+			$name =  $str[2];
+			$phone =  $str[4];
+			$serial_sim = $str[4];		
+			
+			 
+			$crud = new crud('user');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
+			$crud->inserir("name, phone, email, imei, serial_sim", "'$name','$phone', '$email', '$imei', '$serial_sim' "); // utiliza a funçao INSERIR da classe crud
 			
 			
 			//echo $value["name"] . ", " . $value["imei"] . "<br>";
 		
 		
 		
-		$data = var_export($string, true);
+		$data = var_export($data, true);
 		
 		/*header('Content-Type: application/json; charset=utf-8');
 		echo json_encode( array('user'=>$data) );*/
