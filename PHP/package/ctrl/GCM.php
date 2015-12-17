@@ -6,7 +6,7 @@
  * Time: 10:28 PM
  */
 
-class User {
+class GCM {
      public $id;
      public $mensage;
      
