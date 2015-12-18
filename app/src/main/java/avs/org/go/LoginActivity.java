@@ -17,6 +17,7 @@ import avs.org.go.Controller.ContactController;
 import avs.org.go.Controller.CountryController;
 import avs.org.go.Controller.UserController;
 import avs.org.go.db.DataBase;
+import avs.org.go.dominio.Contact;
 import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
@@ -110,13 +111,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     avs.org.go.util.System s = new avs.org.go.util.System();
 
-                    List<HashMap<String,String>> contacts = s.getContactList(this);
+                    List<Contact> contacts = s.getContactList(this);
 
-                    for(HashMap  phone : contacts){
-                        //String p =  phone.keySet();
-                    }
-                    //ContactController cc = new ContactController(this);
-                    //cc.findRemoteContact();
+                    ContactController cc = new ContactController(this);
+                    cc.findRemoteContact(contacts);
 
                     Intent i = new Intent(this, LoginPhotoActivity.class);
                     startActivity(i);
