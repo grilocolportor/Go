@@ -106,9 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                     UserController userController = new UserController(this);
                     userController.saveUser(user);
 
-                    UserRepository ur = new UserRepository(this);
-                    ur.addUser(user);
-
                     avs.org.go.util.System s = new avs.org.go.util.System();
 
                     List<Contact> contacts = s.getContactList(this);
