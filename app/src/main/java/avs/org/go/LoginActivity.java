@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import avs.org.go.Controller.ContactController;
 import avs.org.go.Controller.CountryController;
 import avs.org.go.Controller.UserController;
+import avs.org.go.db.DataBase;
 import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
@@ -99,6 +101,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     UserController userController = new UserController(this);
                     userController.saveUser(user);
+
+                    UserRepository ur = new UserRepository(this);
+                    ur.addUser(user);
+
+                    //ContactController cc = new ContactController(this);
+                    //cc.findRemoteContact();
 
                     Intent i = new Intent(this, LoginPhotoActivity.class);
                     startActivity(i);
