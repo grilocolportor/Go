@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import avs.org.go.Controller.ContactController;
@@ -21,6 +22,8 @@ import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
 import avs.org.go.repository.CountryRespository;
 import avs.org.go.repository.UserRepository;
+import avs.org.go.util.*;
+import avs.org.go.util.System;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -105,6 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                     UserRepository ur = new UserRepository(this);
                     ur.addUser(user);
 
+                    avs.org.go.util.System s = new avs.org.go.util.System();
+
+                    List<HashMap<String,String>> contacts = s.getContactList(this);
+
+                    for(HashMap  phone : contacts){
+                        //String p =  phone.keySet();
+                    }
                     //ContactController cc = new ContactController(this);
                     //cc.findRemoteContact();
 
