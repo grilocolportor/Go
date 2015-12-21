@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Dec 18, 2015 at 04:08 PM
+-- Generation Time: Dec 21, 2015 at 12:44 PM
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.8
 
@@ -299,25 +299,36 @@ INSERT INTO `country_t` (`country_id`, `iso2`, `short_name`, `long_name`, `iso3`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `friends`
+--
+
+CREATE TABLE IF NOT EXISTS `friends` (
+  `phone1` varchar(20) DEFAULT NULL,
+  `phone2` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-`id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `phone` varchar(30) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `imei` varchar(50) NOT NULL,
-  `serial_sim` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `serial_sim` varchar(50) NOT NULL,
+  `ativo` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `phone`, `email`, `imei`, `serial_sim`) VALUES
-(6, 'email222', '115555215554', 'email2', '000000000000000', '89014103211118510720'),
-(9, 'venancio', '558195981890', 'antoniovenancio@yahoo.com.br', '354705064853993', '89550534890011931448');
+INSERT INTO `user` (`id`, `name`, `phone`, `email`, `imei`, `serial_sim`, `ativo`) VALUES
+(10, 'testeContact', '115555215554', 'emailContact@gmailc.om', '000000000000000', '89014103211118510720', 1);
 
 --
 -- Indexes for dumped tables
@@ -330,10 +341,16 @@ ALTER TABLE `country_t`
  ADD PRIMARY KEY (`country_id`);
 
 --
+-- Indexes for table `friends`
+--
+ALTER TABLE `friends`
+ ADD KEY `phone1` (`phone1`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `phone` (`phone`), ADD UNIQUE KEY `imei` (`imei`), ADD UNIQUE KEY `serial_sim` (`serial_sim`);
+ ADD PRIMARY KEY (`phone`), ADD UNIQUE KEY `phone` (`phone`), ADD UNIQUE KEY `imei` (`imei`), ADD UNIQUE KEY `serial_sim` (`serial_sim`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -345,10 +362,15 @@ ALTER TABLE `user`
 ALTER TABLE `country_t`
 MODIFY `country_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=251;
 --
--- AUTO_INCREMENT for table `user`
+-- Constraints for dumped tables
 --
-ALTER TABLE `user`
-MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+
+--
+-- Constraints for table `friends`
+--
+ALTER TABLE `friends`
+ADD CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`phone1`) REFERENCES `user` (`phone`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
