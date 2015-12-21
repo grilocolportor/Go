@@ -1,30 +1,24 @@
 package avs.org.go;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.List;
 
 import avs.org.go.Controller.ContactController;
 import avs.org.go.Controller.CountryController;
 import avs.org.go.Controller.UserController;
-import avs.org.go.db.DataBase;
 import avs.org.go.dominio.Contact;
 import avs.org.go.dominio.Country;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
 import avs.org.go.repository.CountryRespository;
-import avs.org.go.repository.UserRepository;
-import avs.org.go.util.*;
-import avs.org.go.util.System;
 
 
 public class LoginActivity extends AppCompatActivity {
