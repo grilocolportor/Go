@@ -30,7 +30,7 @@ import retrofit.Retrofit;
 public class CountryController {
 
     public static final String TAG = "LOG";
-    public static final String API = Constantes.URL_HOME;
+    public static final String API = Constantes.URL_JOB;
 
     private ApiCountry countryAPI;
 

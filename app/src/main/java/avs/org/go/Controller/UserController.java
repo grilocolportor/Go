@@ -10,7 +10,6 @@ import com.google.gson.GsonBuilder;
 import avs.org.go.api.ApiUser;
 import avs.org.go.dominio.Device;
 import avs.org.go.dominio.User;
-import avs.org.go.dominio.UserWrapRequest;
 import avs.org.go.repository.UserRepository;
 import avs.org.go.util.Constantes;
 import avs.org.go.util.UserDeserializer;
@@ -26,7 +25,7 @@ import retrofit.Retrofit;
 public class UserController {
 
     public static final String TAG = "LOG";
-    public static final String API = Constantes.URL_HOME;
+    public static final String API = Constantes.URL_JOB;
 
     private ApiUser userAPI;
     private User user;
@@ -87,14 +86,17 @@ public class UserController {
                 .build();
         userAPI = retrofit.create(ApiUser.class);
 
-        UserWrapRequest userWrapRequest = new UserWrapRequest( "save-user",  user );
+       // UserWrapRequest userWrapRequest = new UserWrapRequest( "save-user",  user );
 
         //Call<User> call = userAPI.saveUser(userWrapRequest);
-        String gsons = new Gson().toJson(user);
-        Call<User> call = userAPI.saveUser("save-user", gsons);
+        //String gsons = new Gson().toJson(user);
+        Call<User> call = userAPI.saveUser("save-user",new Gson().toJson(user));
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Response<User> response, Retrofit retrofit) {
+
+                User s = response.body();
+
                 UserRepository userRepository = new UserRepository(context);
 
                 userRepository.addUser(user);

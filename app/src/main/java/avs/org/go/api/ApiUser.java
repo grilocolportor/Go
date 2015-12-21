@@ -19,7 +19,7 @@ public interface ApiUser {
 
 
     @FormUrlEncoded
-    @POST("package/ctrl/CtrlCar.php")
+    @POST("package/ctrl/CtrlUser.php")
     Call<User> saveUser( @Field("method") String method, @Field("user") String userJson);
 
     @FormUrlEncoded
