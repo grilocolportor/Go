@@ -28,32 +28,16 @@
         while($campo = mysql_fetch_array($consulta)){
 			$user = new User($campo['name'], $campo['phone'], $campo['email'], $campo['imei'], $campo['serial_sim']);
 		};
-		
-		
-	
-        //$country = new Country(236, 'US', 'United States', 'United States of America', 'USA',
-        //                                                       '840', 'yes', '1', '.us', '10', '11');
 
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode( array('user'=>$user) );
 
     }else if( strcasecmp( $_SG['method'], 'save-user' ) == 0 ){
         $data = json_decode($_SG['user'], true);
-		//$string="";
+		$string="";
 		foreach ($data as  $value) {
-			$string = $string."".$value.",";
-				//$email = $value//$str[1];
-				//$imei =  $value//$str[2];
-				//$name =  $value//$str[3];
-				//$phone =  $value//$str[4];
-				//$serial_sim = //$value$str[5];	
-			
-			 
-		//	$crud = new crud('user');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
-		//	$crud->inserir("name,phone, email, imei, serial_sim", "'$name','$phone', '$email', '$imei', '$serial_sim' "); // utiliza a funçao INSERIR da classe crud
-			
+			$string = $string."".$value.",";	
 		}
-		//$string = $string.",1";
 		
 		$str = preg_split("/[\,]+/", $string); 
 		
@@ -67,34 +51,20 @@
 			$crud = new crud('user');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
 			$crud->inserir("name, phone, email, imei, serial_sim", "'$name','$phone', '$email', '$imei', '$serial_sim' "); // utiliza a funçao INSERIR da classe crud
 			
+			//$numAleatorio = rand(1,99999);
 			
-			//echo $value["name"] . ", " . $value["imei"] . "<br>";
-		
-		
-		
+			//$GCM = new GCM('1', $numAleatorio);
+			
+			
 		$data = var_export($data, true);
 		
 		/*header('Content-Type: application/json; charset=utf-8');
 		echo json_encode( array('user'=>$data) );*/
 		
-		// $data = var_export($data, true);
-		
-		
-		//eval('$teste = ' . $data);
-		//$email = $data->{'email'};
-		//$imei = $data->{'imei'};
-		//$name = $data->{'nome'};
-		//$phone = $data->{'phone'};
-		//$serial_sim = $data->{'serialSim'};
-		
 		File::writeInFile($data, 'w', '../debug/save-user.txt');
 		
-		
-		
-		//$crud = new crud('user');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
-        //$crud->inserir("name,phone, email, imei, serial_sim", "'$name','$phone', '$email', '$imei', '$serial_sim' "); // utiliza a funçao INSERIR da classe crud
-
-       
+		header('Content-Type: application/json; charset=utf-8');
+        echo json_encode( array('gcm'=>$GCM) );
     }
 	
 	//editar

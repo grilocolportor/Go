@@ -21,7 +21,7 @@ class Country {
 
 
     public function __construct( $country_id, $iso2, $short_name, $long_name, $iso3, $numcode, 
-	$un_memmber, $calling_code, $cctld, $phone_size_min, $phone_size_max ){
+									$un_memmber, $calling_code, $cctld, $phone_size_min, $phone_size_max ){
         $this->country_id = $country_id;
         $this->iso2 = $iso2;
         $this->short_name = $short_name;

@@ -14,9 +14,20 @@
         }
 
 
+		
+	if( strcasecmp( $_SG['method'], 'one-country' ) == 0 ){
+
+        
+        $country = new Country('236', 'US', 'United States', 'United States of America', 'USA', '840', 'yes', '1', '.us');
+
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode( array('country'=>$country) );
+
+       
+    }
 
 
-    if( strcasecmp( $_SG['method'], 'one-car' ) == 0 ){
+    else if( strcasecmp( $_SG['method'], 'one-car' ) == 0 ){
 
         $engine = new Engine( 325, 2005, '4.9' );
         $brand = new Brand('Cadillac', null);
@@ -25,6 +36,8 @@
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode( array('car'=>$car) );
     }
+	
+	
 
 
     else if( strcasecmp( $_SG['method'], 'many-cars' ) == 0 ){
@@ -48,14 +61,14 @@
 
     else if( strcasecmp( $_SG['method'], 'save-car' ) == 0 ){
         $data = var_export($_SG['car'], true);
-        File::writeInFile($data, 'w', '../../debug/save-car.txt');
+		File::writeInFile($data, 'w', '../debug/save-car.txt');
     }
 
 
     else if( strcasecmp( $_SG['method'], 'send-img' ) == 0 ){
         $_SG['name_image'] = trim($_SG['name_image'], '"');
 
-        File::writeInFile($_SG['binary_image'], 'w', '../../img/'.$_SG['name_image'].'.png' );
+        File::writeInFile($_SG['binary_image'], 'w', '../img/'.$_SG['name_image'].'.png' );
     }
 
 
@@ -63,7 +76,7 @@
         File::writeInFile('', 'w', '../../debug/header.txt');
 
         foreach (getallheaders() as $key => $value) {
-            File::writeInFile($key.'=>'.$value, 'a', '../../debug/header.txt');
+            File::writeInFile($key.'=>'.$value, 'a', '../debug/header.txt');
         }
     }
 
@@ -71,5 +84,5 @@
     else if( strcasecmp( $_SG['method'], 'save-cars' ) == 0 ){
         $data = json_decode($_SG['cars'], true);
         $data = var_export($data, true);
-        File::writeInFile($data, 'w', '../../debug/cars.txt');
+        File::writeInFile($data, 'w', '../debug/cars.txt');
     }
