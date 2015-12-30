@@ -73,10 +73,10 @@
 		//File::writeInFile($data, 'w', '../debug/log.txt');
 		$string="";
 		
-		
+		$i = 0;
 		foreach ($data as  $value) {
 			if(is_array($value)){
-				//$i = 0;
+				
 				foreach($value as $v3){
 			
 						$str =  preg_replace("/[^0-9]/", "", $v3);
@@ -99,9 +99,14 @@
 							$row = mysql_fetch_assoc($consulta);
 							$phoneFound = $row['phone'];
 							if(strcasecmp($phoneFound,$phone1) != 0){
-								File::writeInFile($phoneFound, 'w', '../debug/log.txt');
-								$crud = new crud('friends');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
-								$crud->inserir("phone1, phone2", "'$phone1','$phoneFound'"); // utiliza a funçao INSERIR da classe crud
+								//File::writeInFile($phoneFound, 'w', '../debug/log.txt');
+								$sqls = "SELECT * FROM friends WHERE phone1 = '". $phone1 ."  and phone2 = ". $str ."'";
+								$consultas = mysql_query($sqls);
+								if(mysql_num_rows($consultas)===0){
+									//File::writeInFile($i, 'w', '../debug/log.txt');
+									$crud = new crud('friends');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
+									$crud->inserir("phone1, phone2", "'$phone1','$phoneFound'"); // utiliza a funçao INSERIR da classe crud
+								}
 							}
 							
 						}
