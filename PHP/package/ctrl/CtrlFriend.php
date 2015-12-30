@@ -70,35 +70,41 @@
 	else if( strcasecmp( $_SG['method'], 'save-contacts' ) == 0 ){
         $data = json_decode($_SG['contacts'], true);
 		$phone1 = $_SG['user'];
-
+		//File::writeInFile($data, 'w', '../debug/log.txt');
 		$string="";
 		
 		
 		foreach ($data as  $value) {
-			//if(is_array($value)){
-			//	foreach($value as $v3){
-					$string = $string."".$value.",";	
-					File::writeInFile($string, 'w', '../debug/log.txt');
-				
-				
-					$str = preg_split("/[\(),]+/", $string); 
-				
-				
-				
-					$_sb = substr($str, 0, 4);
-					File::writeInFile($_sb, 'w', '../debug/log.txt');
-					$contact = $str[1];
-					//File::writeInFile($string, 'w', '../debug/log.txt');
-					//SELECT * FROM `user` where phone like '5581%' and phone like '%95981890'
-				
-					$sql = "SELECT * FROM user WHERE phone like '%". $_sb ." ' and phone like  ' %". $contact ."'";
-					//File::writeInFile($sql, 'w', '../debug/log.txt');
-					$consulta = mysql_query("SELECT * FROM user WHERE phone like '%". $_sb ." ' and phone like  ' %". $contact ."'");
-					//File::writeInFile($consulta, 'w', '../debug/log.txt');
-					if(!empty($consulta)){
-						$crud = new crud('Friends');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
-						$crud->inserir("phone1, phone2", "'$phone1','$contact'"); // utiliza a funçao INSERIR da classe crud
-					}
+			if(is_array($value)){
+				//$i = 0;
+				foreach($value as $v3){
+			
+						$str =  preg_replace("/[^0-9]/", "", $v3);
+						$_sb = "";
+						if(strlen($str) === 8 || strlen($str) === 9){
+							$_sb = substr($phone1, 0, 4);
+						}else if(strlen($str) === 10 || strlen($str) === 11){
+							$_sb = substr($phone1, 0, 2);
+						}else{
+							$_sb = $str;
+						}
+						
+						
+						
+						$sql = "SELECT * FROM user WHERE phone like '". $_sb ."%". $str ."'";
+						//File::writeInFile($sql, 'w', '../debug/log.txt');
+						$consulta = mysql_query($sql);
+						//File::writeInFile(mysql_num_rows($consulta), 'w', '../debug/log.txt');
+						if(mysql_num_rows($consulta)===1){
+							$row = mysql_fetch_assoc($consulta);
+							$phoneFound = $row['phone'];
+							if(strcasecmp($phoneFound,$phone1) != 0){
+								File::writeInFile($phoneFound, 'w', '../debug/log.txt');
+								$crud = new crud('friends');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
+								$crud->inserir("phone1, phone2", "'$phone1','$phoneFound'"); // utiliza a funçao INSERIR da classe crud
+							}
+							
+						}
 				}
 			}
 		}
@@ -106,12 +112,3 @@
 		$data = var_export($data, true);
         File::writeInFile($data, 'w', '../debug/saver-contacts.txt');
     }
-	
-	
-	
-	//editar
-	// $nome = $_POST['nome']; //pega o elemento com o pelo NAME
-    //    $descricao = $_POST['descricao']; //pega o elemento com o pelo NAME
-    //    $crud = new crud('produto'); // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
-    //    $crud->atualizar("nome='$nome',descricao='$descricao'", "id='$getId'"); // utiliza a funçao ATUALIZAR da classe crud
-    //    header("Location: index.php"); // redireciona para a listagem
