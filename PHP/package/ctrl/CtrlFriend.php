@@ -100,9 +100,10 @@
 							$phoneFound = $row['phone'];
 							if(strcasecmp($phoneFound,$phone1) != 0){
 								//File::writeInFile($phoneFound, 'w', '../debug/log.txt');
-								$sqls = "SELECT * FROM friends WHERE phone1 = '". $phone1 ."  and phone2 = ". $str ."'";
+								$sqls = "SELECT * FROM friends WHERE phone1 = '". $phone1 ."'  and phone2 = '". $_sb ."". $str ."'";
+								File::writeInFile($sqls, 'w', '../debug/log.txt');
 								$consultas = mysql_query($sqls);
-								if(mysql_num_rows($consultas)===0){
+								if(mysql_num_rows($consultas)<1){
 									//File::writeInFile($i, 'w', '../debug/log.txt');
 									$crud = new crud('friends');  // instancia classe com as operaçoes crud, passando o nome da tabela como parametro
 									$crud->inserir("phone1, phone2", "'$phone1','$phoneFound'"); // utiliza a funçao INSERIR da classe crud
